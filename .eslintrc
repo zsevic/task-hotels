@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "standard"
+  ],
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "globals": {
+    "api": true,
+    "expect": true
+  }
+}

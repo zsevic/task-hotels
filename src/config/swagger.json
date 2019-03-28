@@ -1,0 +1,436 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "task-hotels",
+    "description": "REST API for task-hotels",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    },
+    {
+      "name": "Hotels",
+      "description": "API for hotels in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "description": "Value: Bearer {jwt}",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New user is created",
+            "examples": {
+              "application/json": {
+                "_id": "_id",
+                "userName": "userName",
+                "token": "Bearer token"
+              }
+            }
+          },
+          "400": {
+            "description": "Request body is not valid"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Login credentials",
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": {
+              "application/json": {
+                "_id": "id",
+                "userName": "userName",
+                "token": "Bearer token"
+              }
+            }
+          },
+          "400": {
+            "description": "Request body is not valid"
+          },
+          "401": {
+            "description": "Credentials are not valid"
+          }
+        }
+      }
+    },
+    "/hotels": {
+      "post": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Create new hotel",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "body",
+            "description": "Hotel details",
+            "schema": {
+              "$ref": "#/definitions/CreateHotel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "New hotel is created",
+            "examples": {
+              "application/json": {
+                "_id": "_id",
+                "title": "title",
+                "text": "text",
+                "createdAt": "date",
+                "slug": "slugged title",
+                "user": "user _id",
+                "favoriteCount": 0
+              }
+            }
+          },
+          "400": {
+            "description": "Request body is not valid"
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Get all hotels",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Hotels"
+            }
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}": {
+      "parameters": [
+        {
+          "name": "hotelId",
+          "in": "path",
+          "required": true,
+          "description": "ID of hotel that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Get hotel with given ID",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel is found",
+            "schema": {
+              "$ref": "#/definitions/Hotel"
+            }
+          },
+          "400": {
+            "description": "Hotel with given ID is not found"
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Delete hotel with given ID",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel with given ID is deleted"
+          },
+          "400": {
+            "description": "Given ID is not valid"
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Update hotel with given ID",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "body",
+            "description": "Hotel with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/CreateHotel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel is updated",
+            "schema": {
+              "$ref": "#/definitions/Hotel"
+            }
+          },
+          "400": {
+            "description": "Request body is not valid"
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}/favorite": {
+      "parameters": [
+        {
+          "name": "hotelId",
+          "in": "path",
+          "required": true,
+          "description": "ID of hotel that we want to find",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Favorite hotel with given ID",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel with given ID is favorited"
+          },
+          "400": {
+            "description": "Given ID is not valid"
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "firstName",
+        "lastName",
+        "userName",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "test@test.com",
+          "uniqueItems": true
+        },
+        "firstName": {
+          "type": "string",
+          "example": "firstName"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "lastName"
+        },
+        "userName": {
+          "type": "string",
+          "example": "userName",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string",
+          "example": "Test1234"
+        }
+      }
+    },
+    "Hotel": {
+      "required": [
+        "title",
+        "text"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "text": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "favoriteCount": {
+          "type": "number"
+        },
+        "favorite": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LoginUser": {
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "te2st@test.com",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string",
+          "example": "Test1234"
+        }
+      }
+    },
+    "CreateHotel": {
+      "required": [
+        "title",
+        "text"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "hotel title",
+          "uniqueItems": true,
+          "minLength": 3
+        },
+        "text": {
+          "type": "string",
+          "example": "hotel text text",
+          "minLength": 10
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "Hotels": {
+      "type": "array",
+      "$ref": "#/definitions/Hotel"
+    }
+  }
+}
