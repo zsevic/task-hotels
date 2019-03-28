@@ -53,6 +53,27 @@ describe('API tests', () => {
       }) */
     })
 
+    describe('GET /api/v1/users/:id/favorites', () => {
+      it("should get user's favorite hotels", async () => {
+        const {
+          body: { _id, token }
+        } = await api.post('/api/v1/users/login').send({
+          email: 'test23@test.com',
+          password: 'Test1234'
+        })
+
+        const hotels = await api
+          .get(`/api/v1/users/${_id}/favorites`)
+          .set('Authorization', token)
+
+        expect(hotels.statusCode).to.be.equal(200)
+      })
+
+      /*       it('should return error when user is not authorized', done => {
+        api.get(`/api/v1/hotels`).expect(401, done)
+      }) */
+    })
+
     describe('POST /api/v1/users/login', () => {
       it('should login with valid credentials', done => {
         api

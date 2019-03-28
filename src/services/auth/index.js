@@ -33,4 +33,11 @@ export const isAdmin = (req, res, next) => {
   return res.status(HTTPStatus.UNAUTHORIZED).end()
 }
 
+export const isFavoritesOwner = (req, res, next) => {
+  if (req.user._id.equals(req.params.id)) {
+    return next()
+  }
+  return res.status(HTTPStatus.UNAUTHORIZED).end()
+}
+
 export { authLocal } from './local'

@@ -1,6 +1,18 @@
 import HTTPStatus from 'http-status'
 import User from './user.model'
 
+export async function getFavorites (req, res) {
+  try {
+    const {
+      favorites: { hotels }
+    } = await User.findById(req.user._id)
+
+    return res.status(HTTPStatus.OK).json(hotels)
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e)
+  }
+}
+
 export async function signUp (req, res) {
   try {
     const user = await User.create(req.body)

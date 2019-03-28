@@ -7,8 +7,7 @@ const HotelSchema = new Schema(
       type: String,
       trim: true,
       required: [true, 'Name is required'],
-      minlength: [3, 'Name needs to be longer'],
-      unique: true
+      minlength: [3, 'Name needs to be longer']
     },
 
     address: {

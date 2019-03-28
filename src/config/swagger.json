@@ -39,6 +39,38 @@
     }
   },
   "paths": {
+    "/users/{userId}/favorites": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user's favorite hotels",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User's favorite hotels",
+            "schema": {
+              "$ref": "#/definitions/Hotels"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Hotels"
+            }
+          },
+          "401": {
+            "description": "User is not authorized"
+          }
+        }
+      }
+    },
     "/users/signup": {
       "post": {
         "tags": [

@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose'
 import validator from 'validator'
 import { hashSync, compareSync } from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
-import { passwordReg } from './user.validations'
+// import { passwordReg } from './user.validations'
 import constants from '../../config/constants'
 import Hotel from '../hotels/hotel.model'
 
@@ -37,13 +37,13 @@ const UserSchema = new Schema({
     type: String,
     // required: [true, 'Password is required!'],
     trim: true,
-    minlength: [6, 'Password needs to be longer!'],
-    validate: {
+    minlength: [6, 'Password needs to be longer!']
+    /* validate: {
       validator (password) {
         return passwordReg.test(password)
       },
       message: '{VALUE} is not a valid password!'
-    }
+    } */
   },
 
   favorites: {
@@ -97,6 +97,10 @@ UserSchema.methods = {
   },
 
   _favorites: {
+    getHotels () {
+      return this.favorites.hotels
+    },
+
     async hotels (hotelId) {
       if (this.favorites.hotels.indexOf(hotelId) >= 0) {
         this.favorites.hotels.remove(hotelId)

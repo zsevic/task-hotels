@@ -20,14 +20,33 @@ try {
 
 const isTest = process.env.NODE_ENV === 'testing'
 
-export const createUsers = async numOfUsers => {
-  for (let i = 0; i < numOfUsers; i++) {
+export const seedDb = async num => {
+  for (let i = 0; i < num; i++) {
     let user = new User({
       userName: faker.internet.userName(),
       email: faker.internet.email(),
       password: faker.internet.password()
     })
     await user.save()
+  }
+
+  let admin = new User({
+    userName: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(),
+    role: 'admin'
+  })
+  await admin.save()
+
+  for (let i = 0; i < num; i++) {
+    let hotel = {
+      name: faker.company.companyName(),
+      address: faker.address.streetAddress(),
+      image: faker.image.imageUrl(),
+      description: faker.lorem.words(),
+      geolocation: `${faker.address.latitude()} ${faker.address.longitude()}`
+    }
+    await Hotel.createHotel(hotel, admin._id)
   }
 }
 
@@ -37,7 +56,7 @@ mongoose.connection
     if (!isTest) {
       await User.deleteMany({})
       await Hotel.deleteMany({})
-      await createUsers(10)
+      await seedDb(10)
     }
   })
   .on('error', e => {

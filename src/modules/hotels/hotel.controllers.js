@@ -32,6 +32,7 @@ export async function getHotelById (req, res) {
 export async function getHotelsList (req, res) {
   const limit = parseInt(req.query.limit, 0)
   const skip = parseInt(req.query.limit, 0)
+
   try {
     const promise = await Promise.all([
       User.findById(req.user._id),

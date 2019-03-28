@@ -1,6 +1,6 @@
 import Joi from 'joi'
 
-export const passwordReg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
+// export const passwordReg = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/
 
 export default {
   signup: {
@@ -8,7 +8,8 @@ export default {
       .email()
       .required(),
     password: Joi.string()
-      .regex(passwordReg)
+      .min(8)
+      //  .regex(passwordReg)
       .required(),
     userName: Joi.string().required()
   }
