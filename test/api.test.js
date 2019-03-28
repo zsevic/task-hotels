@@ -100,22 +100,9 @@ describe('API tests', () => {
   describe('Hotels', () => {
     describe('GET /api/v1/hotels', () => {
       it('should get all hotels', async () => {
-        const {
-          body: { token }
-        } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
-          password: 'Test1234'
-        })
-
-        const response = await api
-          .get('/api/v1/hotels')
-          .set('Authorization', token)
+        const response = await api.get('/api/v1/hotels')
 
         expect(response.statusCode).to.be.equal(200)
-      })
-
-      it('should return error when user is not authorized', done => {
-        api.get(`/api/v1/hotels`).expect(401, done)
       })
     })
 
@@ -192,16 +179,20 @@ describe('API tests', () => {
       })
 
       it('should return error when user is not authorized', done => {
-        api
-          .post(`/api/v1/hotels/`)
-          .send({
-            name: 'hotel name',
-            address: 'hotel address',
-            image: 'hotel image',
-            description: 'hotel description',
-            geolocation: 'hotel geolocation'
-          })
-          .expect(401, done)
+        try {
+          api
+            .post(`/api/v1/hotels/`)
+            .send({
+              name: 'hotel name',
+              address: 'hotel address',
+              image: 'hotel image',
+              description: 'hotel description',
+              geolocation: 'hotel geolocation'
+            })
+            .expect(401, done)
+        } catch (err) {
+          expect(err.status).to.be.equal(401)
+        }
       })
     })
 
@@ -218,22 +209,16 @@ describe('API tests', () => {
           .post('/api/v1/hotels')
           .set('Authorization', token)
           .send({
-            name: 'hotel name3',
+            name: 'hotel na3me3',
             address: 'hotel a2ddress',
             image: 'hotel imag2e',
             description: 'hotel2 description',
             geolocation: 'hotel 2geolocation'
           })
 
-        const response = await api
-          .get(`/api/v1/hotels/${hotel.body._id}`)
-          .set('Authorization', token)
+        const response = await api.get(`/api/v1/hotels/${hotel.body._id}`)
 
         expect(response.statusCode).to.be.equal(200)
-      })
-
-      it('should return error when user is not authorized', done => {
-        api.get(`/api/v1/hotels/5c8857861993271ea24c5de4`).expect(401, done)
       })
     })
 

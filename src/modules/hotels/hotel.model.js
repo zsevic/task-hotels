@@ -61,10 +61,6 @@ HotelSchema.plugin(uniqueValidator, {
   message: '{VALUE} already taken!'
 })
 
-/* HotelSchema.pre('validate', function (next) {
-  next()
-}) */
-
 HotelSchema.methods = {
   toJSON () {
     return {
@@ -89,12 +85,42 @@ HotelSchema.statics = {
     })
   },
 
-  list ({ skip = 0, limit = 5 } = {}) {
-    return this.find()
-      .sort({ name: 1 })
-      .skip(skip)
-      .limit(limit)
-      .populate('user')
+  async list ({ skip, limit, searchData }) {
+    let query = [
+      {
+        $project: {
+          name: 1,
+          address: 1,
+          image: 1,
+          description: 1,
+          geolocation: 1
+        }
+      },
+      {
+        $match: {
+          $or: [
+            {
+              name: { $regex: searchData, $options: 'i' }
+            },
+            {
+              address: {
+                $regex: searchData,
+                $options: 'i'
+              }
+            }
+          ]
+        }
+      },
+      {
+        $sort: {
+          name: 1
+        }
+      },
+      { $limit: +limit },
+      { $skip: +skip }
+    ]
+
+    return this.aggregate(query)
   },
 
   incFavoriteCount (hotelId) {

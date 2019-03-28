@@ -97,10 +97,6 @@ UserSchema.methods = {
   },
 
   _favorites: {
-    getHotels () {
-      return this.favorites.hotels
-    },
-
     async hotels (hotelId) {
       if (this.favorites.hotels.indexOf(hotelId) >= 0) {
         this.favorites.hotels.remove(hotelId)

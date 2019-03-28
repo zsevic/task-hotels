@@ -12,7 +12,7 @@ const testConfig = {
 }
 
 const prodConfig = {
-  MONGODB_URL: process.env.MONGODB_URL,
+  MONGODB_URL: process.env.MONGODB_URI,
   JWT_SECRET: process.env.JWT_SECRET
 }
 

@@ -45,7 +45,7 @@ yarn build
 yarn start
 ```
 
-### :rotation_alarm: Testing
+### :rotating_light: Testing
 
 ```bash
 yarn test

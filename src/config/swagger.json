@@ -209,9 +209,6 @@
             "schema": {
               "$ref": "#/definitions/Hotels"
             }
-          },
-          "401": {
-            "description": "User is not authorized"
           }
         }
       }
@@ -243,9 +240,6 @@
           },
           "400": {
             "description": "Hotel with given ID is not found"
-          },
-          "401": {
-            "description": "User is not authorized"
           }
         }
       },

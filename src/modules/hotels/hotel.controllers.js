@@ -13,40 +13,20 @@ export async function createHotel (req, res) {
 
 export async function getHotelById (req, res) {
   try {
-    const promise = await Promise.all([
-      User.findById(req.user._id),
-      Hotel.findById(req.params.id).populate('user')
-    ])
-    const favorite = promise[0]._favorites.isHotelIsFavorite(req.params.id)
-    const hotel = promise[1]
-
-    return res.status(HTTPStatus.OK).json({
-      ...hotel.toJSON(),
-      favorite
-    })
+    const hotel = await Hotel.findById(req.params.id)
+    return res.status(HTTPStatus.OK).json(hotel)
   } catch (e) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e)
   }
 }
 
 export async function getHotelsList (req, res) {
-  const limit = parseInt(req.query.limit, 0)
-  const skip = parseInt(req.query.limit, 0)
+  const limit = parseInt(req.query.limit, 10) || 5
+  const skip = parseInt(req.query.skip, 10) || 0
+  const searchData = req.query.search || ''
 
   try {
-    const promise = await Promise.all([
-      User.findById(req.user._id),
-      Hotel.list({ limit, skip })
-    ])
-    const hotels = promise[1].reduce((arr, hotel) => {
-      const favorite = promise[0]._favorites.isHotelIsFavorite(hotel._id)
-
-      arr.push({
-        ...hotel.toJSON(),
-        favorite
-      })
-      return arr
-    }, [])
+    const hotels = await Hotel.list({ limit, skip, searchData })
 
     return res.status(HTTPStatus.OK).json(hotels)
   } catch (e) {

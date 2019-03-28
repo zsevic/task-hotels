@@ -6,7 +6,7 @@ import { authJwt, isAdmin } from '../../services/auth'
 import hotelValidation from './hotel.validations'
 
 const routes = new Router()
-routes.get('/', authJwt, hotelController.getHotelsList)
+routes.get('/', hotelController.getHotelsList)
 routes.post(
   '/',
   authJwt,
@@ -15,7 +15,7 @@ routes.post(
   hotelController.createHotel
 )
 
-routes.get('/:id', authJwt, hotelController.getHotelById)
+routes.get('/:id', hotelController.getHotelById)
 routes.patch(
   '/:id',
   authJwt,
