@@ -111,8 +111,11 @@ describe('API tests', () => {
           .post('/api/v1/hotels')
           .set('Authorization', token)
           .send({
-            title: 'title',
-            text: 'text text text'
+            name: 'hotel name1223',
+            address: 'hotel addr2ess',
+            image: 'hotel imag2e',
+            description: 'hotel descriptio2n',
+            geolocation: 'hotel geolocatio2n'
           })
 
         expect(response.statusCode).to.be.equal(201)
@@ -131,8 +134,11 @@ describe('API tests', () => {
             .post('/api/v1/hotels')
             .set('Authorization', token)
             .send({
-              title: 'title',
-              text: 'text text text'
+              name: 'ho2tel name123',
+              address: 'ho2tel address',
+              image: 'ho2tel image',
+              description: 'ho2tel description',
+              geolocation: 'h2otel geolocation'
             })
 
           expect(response.statusCode).to.be.equal(401)
@@ -154,8 +160,8 @@ describe('API tests', () => {
             .post('/api/v1/hotels')
             .set('Authorization', token)
             .send({
-              title: 'ti',
-              text: 'text text text'
+              name: 'n',
+              address: 'address'
             })
 
           expect(response.status).to.be.equal(400)
@@ -168,8 +174,11 @@ describe('API tests', () => {
         api
           .post(`/api/v1/hotels/`)
           .send({
-            title: 'test',
-            text: 'text text text'
+            name: 'hotel name',
+            address: 'hotel address',
+            image: 'hotel image',
+            description: 'hotel description',
+            geolocation: 'hotel geolocation'
           })
           .expect(401, done)
       })
@@ -188,8 +197,11 @@ describe('API tests', () => {
           .post('/api/v1/hotels')
           .set('Authorization', token)
           .send({
-            title: 'title12',
-            text: 'text text text'
+            name: 'hotel name3',
+            address: 'hotel a2ddress',
+            image: 'hotel imag2e',
+            description: 'hotel2 description',
+            geolocation: 'hotel 2geolocation'
           })
 
         const response = await api
@@ -217,16 +229,22 @@ describe('API tests', () => {
           .post('/api/v1/hotels')
           .set('Authorization', token)
           .send({
-            title: 'title2',
-            text: 'text text text'
+            name: 'hotel n2ame123',
+            address: 'hotel2 address',
+            image: 'hotel im2age',
+            description: 'hot2el description',
+            geolocation: 'ho2tel geolocation'
           })
 
         const response = await api
           .patch(`/api/v1/hotels/${hotel.body._id}`)
           .set('Authorization', token)
           .send({
-            title: 'title6',
-            text: 'text text text'
+            name: 'hotel name1123',
+            address: 'hotel add2ress',
+            image: 'hotel image2',
+            description: 'hotel 2description',
+            geolocation: 'hotel g2eolocation'
           })
 
         expect(response.statusCode).to.be.equal(200)
@@ -254,7 +272,7 @@ describe('API tests', () => {
         api
           .patch(`/api/v1/hotels/5c8857861993271ea24c5de4`)
           .send({
-            title: 'test'
+            name: 'name'
           })
           .expect(401, done)
       })
@@ -272,8 +290,11 @@ describe('API tests', () => {
           .post('/api/v1/hotels')
           .set('Authorization', token)
           .send({
-            title: 'title3',
-            text: 'text text text'
+            name: 'hotel name1',
+            address: 'hotel address',
+            image: 'hotel image',
+            description: 'hotel description',
+            geolocation: 'hotel geolocation'
           })
 
         const response = await api
@@ -319,8 +340,11 @@ describe('API tests', () => {
           .post('/api/v1/hotels')
           .set('Authorization', token)
           .send({
-            title: 'title123',
-            text: 'text text text'
+            name: 'hotel name123',
+            address: 'hotel address',
+            image: 'hotel image',
+            description: 'hotel description',
+            geolocation: 'hotel geolocation'
           })
 
         const response = await api

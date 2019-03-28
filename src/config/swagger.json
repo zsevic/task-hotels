@@ -144,10 +144,12 @@
             "examples": {
               "application/json": {
                 "_id": "_id",
-                "title": "title",
-                "text": "text",
+                "name": "name",
+                "address": "address",
+                "image": "image",
+                "description": "description",
+                "geolocation": "geolocation",
                 "createdAt": "date",
-                "slug": "slugged title",
                 "user": "user _id",
                 "favoriteCount": 0
               }
@@ -351,25 +353,37 @@
     },
     "Hotel": {
       "required": [
-        "title",
-        "text"
+        "name",
+        "address",
+        "image",
+        "description",
+        "geolocation"
       ],
       "properties": {
         "_id": {
           "type": "string",
           "uniqueItems": true
         },
-        "title": {
+        "name": {
           "type": "string",
           "uniqueItems": true
         },
-        "text": {
+        "address": {
           "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "geolocation": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
         },
         "createdAt": {
-          "type": "string"
-        },
-        "slug": {
           "type": "string"
         },
         "user": {
@@ -402,20 +416,38 @@
     },
     "CreateHotel": {
       "required": [
-        "title",
-        "text"
+        "name",
+        "address",
+        "image",
+        "description",
+        "geolocation"
       ],
       "properties": {
-        "title": {
+        "name": {
           "type": "string",
-          "example": "hotel title",
+          "example": "hotel name",
           "uniqueItems": true,
           "minLength": 3
         },
-        "text": {
+        "address": {
           "type": "string",
-          "example": "hotel text text",
+          "example": "hotel address",
           "minLength": 10
+        },
+        "image": {
+          "type": "string",
+          "example": "hotel image",
+          "minLength": 5
+        },
+        "description": {
+          "type": "string",
+          "example": "hotel description",
+          "minLength": 5
+        },
+        "geolocation": {
+          "type": "string",
+          "example": "hotel geolocation",
+          "minLength": 5
         }
       }
     },

@@ -1,28 +1,46 @@
 import mongoose, { Schema } from 'mongoose'
-import slug from 'slug'
 import uniqueValidator from 'mongoose-unique-validator'
 
 const HotelSchema = new Schema(
   {
-    title: {
+    name: {
       type: String,
       trim: true,
-      required: [true, 'Title is required!'],
-      minlength: [3, 'Title needs to be longer!'],
+      required: [true, 'Name is required'],
+      minlength: [3, 'Name needs to be longer'],
       unique: true
     },
 
-    text: {
+    address: {
       type: String,
       trim: true,
-      required: [true, 'Text is required!'],
-      minlength: [10, 'Text needs to be longer']
+      required: [true, 'Address is required'],
+      minlength: [5, 'Address needs to be longer']
     },
 
-    slug: {
+    image: {
       type: String,
       trim: true,
-      lowercase: true
+      required: [true, 'Image is required'],
+      minLength: [5, 'Image link needs to be longer']
+    },
+
+    description: {
+      type: String,
+      trim: true,
+      required: [true, 'Description is required'],
+      minLength: [5, 'Description needs to be longer']
+    },
+
+    geolocation: {
+      type: String,
+      trim: true,
+      required: [true, 'Geolocation is required'],
+      minLength: [5, 'Geolocation is required']
+    },
+
+    rating: {
+      type: Number
     },
 
     user: {
@@ -44,23 +62,20 @@ HotelSchema.plugin(uniqueValidator, {
   message: '{VALUE} already taken!'
 })
 
-HotelSchema.pre('validate', function (next) {
-  this._slugify()
+/* HotelSchema.pre('validate', function (next) {
   next()
-})
+}) */
 
 HotelSchema.methods = {
-  _slugify () {
-    this.slug = slug(this.title)
-  },
-
   toJSON () {
     return {
       _id: this._id,
-      title: this.title,
-      text: this.text,
+      name: this.name,
+      address: this.address,
+      image: this.image,
+      description: this.description,
+      geolocation: this.geolocation,
       createdAt: this.createdAt,
-      slug: this.slug,
       user: this.user,
       favoriteCount: this.favoriteCount
     }
@@ -76,14 +91,11 @@ HotelSchema.statics = {
   },
 
   list ({ skip = 0, limit = 5 } = {}) {
-    return (
-      this.find()
-        // name asc
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit)
-        .populate('user')
-    )
+    return this.find()
+      .sort({ name: 1 })
+      .skip(skip)
+      .limit(limit)
+      .populate('user')
   },
 
   incFavoriteCount (hotelId) {
