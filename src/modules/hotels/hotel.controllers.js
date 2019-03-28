@@ -71,3 +71,14 @@ export async function favoriteHotel (req, res) {
     return res.status(HTTPStatus.BAD_REQUEST).json(e)
   }
 }
+
+export async function getReviews (req, res) {
+  try {
+    const hotel = await Hotel.findById(req.params.id)
+    const reviews = hotel.reviews
+
+    return res.status(HTTPStatus.OK).json(reviews)
+  } catch (e) {
+    return res.status(HTTPStatus.BAD_REQUEST).json(e)
+  }
+}

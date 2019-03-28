@@ -47,6 +47,34 @@ const HotelSchema = new Schema(
       ref: 'User'
     },
 
+    reviews: [
+      {
+        description: {
+          type: String
+        },
+
+        rating: {
+          type: Number,
+          min: 0,
+          max: 5
+        },
+
+        likes: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+          }
+        ],
+
+        dislikes: [
+          {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+          }
+        ]
+      }
+    ],
+
     favoriteCount: {
       type: Number,
       default: 0

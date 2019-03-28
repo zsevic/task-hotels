@@ -6,13 +6,12 @@ import User from '../modules/users/user.model'
 import Hotel from '../modules/hotels/hotel.model'
 
 mongoose.Promise = global.Promise
-mongoose.set('useCreateIndex', true)
 mongoose.set('useFindAndModify', false)
 
 try {
   mongoose.connect(
     constants.MONGODB_URL,
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, useCreateIndex: true }
   )
 } catch (err) {
   mongoose.createConnection(constants.MONGODB_URL)

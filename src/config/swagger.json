@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:8080",
+  "host": "task-hotels.herokuapp.com",
   "basePath": "/api/v1",
   "tags": [
     {
@@ -300,6 +300,28 @@
           },
           "401": {
             "description": "User is not authorized"
+          }
+        }
+      }
+    },
+    "/hotels/{hotelId}/reviews": {
+      "parameters": [
+        {
+          "name": "hotelId",
+          "in": "path",
+          "required": true,
+          "description": "ID of hotel that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Hotels"
+        ],
+        "summary": "Reviews for hotel with given ID",
+        "responses": {
+          "200": {
+            "description": "Reviews for hotel with given ID"
           }
         }
       }

@@ -6,27 +6,38 @@ See demo: [https://task-hotels.herokuapp.com/api-docs](https://task-hotels.herok
 
 ### :sparkles: Features
 
-- [x] CRUD operations
-- [x] Node.js with Express
-- [x] MongoDB database with MongoDB
-    * entities: users, hotels
-- [x] Authentication
-    - [x] local
-    * powered by JWT
-    * sign up, sign in
-- [x] Authorization
-    * protected endpoints
-        * session-based
-        * permission-based
-        * role-based
-- [x] API testing
-- [x] API documentation
-- [x] Setups
-    - [x] Eslint
-    - [x] Travis CI
-    - [x] Environment variables
-    - [x] Git hooks for commit
-    - [x] Heroku deployment
+- CRUD operations
+- Node.js with Express
+- MongoDB database with MongoDB
+    - entities: users, hotels
+- Authentication
+    - powered by JWT
+    - sign up, sign in
+- Authorization
+    - protected endpoints
+        - session-based
+        - permission-based
+        - role-based
+- API testing
+- API documentation
+- Setups
+    - Eslint
+    - Travis CI
+    - Environment variables
+    - Git hooks for commit
+    - Heroku deployment
+
+### :books: Documentation
+
+* `yarn dev`
+* open `http://localhost:8080/api-docs`
+
+### :warning: Prerequisites
+
+* Node.js - v10.10.0
+* Npm - 6.7.0
+* Yarn - 1.13.0
+* MongoDB - v3.6.3
 
 ### :wrench: Setup
 
@@ -51,7 +62,21 @@ yarn start
 yarn test
 ```
 
-### :books: Documentation
+### :arrow_right: Usage
 
-* `yarn dev`
-* open `http://localhost:8080/api-docs`
+```bash
+POST /api/v1/users/signup
+POST /api/v1/users/login
+GET /api/v1/users/:id/favorite
+
+GET /api/v1/hotels/
+GET /api/v1/hotels/?limit=4
+GET /api/v1/hotels/?limit=4&skip=2
+GET /api/v1/hotels/?search=<NAME or ADDRESS>
+POST /api/v1/hotels/
+POST /api/v1/hotels/:id
+PATCH /api/v1/hotels/:id
+DELETE /api/v1/hotels/:id
+POST /api/v1/hotels/:id/favorite
+POST /api/v1/hotels/:id/reviews
+```

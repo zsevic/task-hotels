@@ -42,15 +42,6 @@ describe('API tests', () => {
           })
           .expect(201, done)
       })
-
-      /* it('should return error when request body is not valid', done => {
-        api
-          .post('/api/v1/users/signup')
-          .send({
-            test: 'test@test.com'
-          })
-          .expect(400, done)
-      }) */
     })
 
     describe('GET /api/v1/users/:id/favorites', () => {
@@ -68,10 +59,6 @@ describe('API tests', () => {
 
         expect(hotels.statusCode).to.be.equal(200)
       })
-
-      /*       it('should return error when user is not authorized', done => {
-        api.get(`/api/v1/hotels`).expect(401, done)
-      }) */
     })
 
     describe('POST /api/v1/users/login', () => {
@@ -366,5 +353,17 @@ describe('API tests', () => {
           .expect(401, done)
       })
     })
+
+    /* describe('GET /api/v1/hotels/:id/reviews', () => {
+      it('should get reviews for a hotel with given ID', async () => {
+        const hotels = await api.get('/api/v1/hotels')
+        const hotel = hotels.body[0]
+
+        console.log(hotel._id)
+        const response = api.get(`/api/v1/hotels/${hotel._id}/reviews`)
+
+        expect(response.statusCode).to.be.equal(200)
+      })
+    }) */
   })
 })

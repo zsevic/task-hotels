@@ -27,4 +27,6 @@ routes.delete('/:id', authJwt, isAdmin, hotelController.deleteHotel)
 
 routes.post('/:id/favorite', authJwt, hotelController.favoriteHotel)
 
+routes.get('/:id/reviews', hotelController.getReviews)
+
 export default routes
