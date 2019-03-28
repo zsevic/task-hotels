@@ -26,8 +26,7 @@ describe('API tests', () => {
             email: 'test@test.com',
             password: 'Test1234',
             userName: 'test',
-            firstName: 'test',
-            lastName: 'test'
+            role: 'user'
           })
           .expect(201, done)
       })

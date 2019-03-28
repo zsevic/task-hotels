@@ -20,22 +20,15 @@ const UserSchema = new Schema({
     }
   },
 
-  firstName: {
-    type: String,
-    // required: [true, 'FirstName is required!'],
-    trim: true
-  },
-
-  lastName: {
-    type: String,
-    // required: [true, 'LastName is required!'],
-    trim: true
-  },
-
   userName: {
     type: String,
     unique: true,
     // required: [true, 'UserName is required!'],
+    trim: true
+  },
+
+  role: {
+    type: String,
     trim: true
   },
 

@@ -324,10 +324,9 @@
     "User": {
       "required": [
         "email",
-        "firstName",
-        "lastName",
         "userName",
-        "password"
+        "password",
+        "role"
       ],
       "properties": {
         "email": {
@@ -335,18 +334,14 @@
           "example": "test@test.com",
           "uniqueItems": true
         },
-        "firstName": {
-          "type": "string",
-          "example": "firstName"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "lastName"
-        },
         "userName": {
           "type": "string",
           "example": "userName",
           "uniqueItems": true
+        },
+        "role": {
+          "type": "string",
+          "example": "user"
         },
         "password": {
           "type": "string",

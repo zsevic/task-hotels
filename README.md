@@ -19,6 +19,7 @@ See demo: [https://restic.herokuapp.com/api-docs](https://restic.herokuapp.com/a
     * protected endpoints
         * session-based
         * permission-based
+        * role-based
 - [x] API testing
 - [x] API documentation
 - [x] Setups
