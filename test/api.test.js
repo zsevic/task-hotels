@@ -31,6 +31,18 @@ describe('API tests', () => {
           .expect(201, done)
       })
 
+      it('should create a new admin user', done => {
+        api
+          .post('/api/v1/users/signup')
+          .send({
+            email: 'test23@test.com',
+            password: 'Test1234',
+            userName: 'test23',
+            role: 'admin'
+          })
+          .expect(201, done)
+      })
+
       /* it('should return error when request body is not valid', done => {
         api
           .post('/api/v1/users/signup')
@@ -91,7 +103,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 
@@ -106,11 +118,34 @@ describe('API tests', () => {
         expect(response.statusCode).to.be.equal(201)
       })
 
-      it('should return error when request body is not valid', async () => {
+      it('should return error when user is not admin', async () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
           email: 'test@test.com',
+          password: 'Test1234'
+        })
+
+        try {
+          const response = await api
+            .post('/api/v1/hotels')
+            .set('Authorization', token)
+            .send({
+              title: 'title',
+              text: 'text text text'
+            })
+
+          expect(response.statusCode).to.be.equal(401)
+        } catch (err) {
+          expect(err.status).to.be.equal(401)
+        }
+      })
+
+      it('should return error when request body is not valid', async () => {
+        const {
+          body: { token }
+        } = await api.post('/api/v1/users/login').send({
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 
@@ -145,7 +180,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 
@@ -174,7 +209,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 
@@ -201,7 +236,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 
@@ -230,7 +265,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
         const hotel = await api
@@ -252,7 +287,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 
@@ -276,7 +311,7 @@ describe('API tests', () => {
         const {
           body: { token }
         } = await api.post('/api/v1/users/login').send({
-          email: 'test@test.com',
+          email: 'test23@test.com',
           password: 'Test1234'
         })
 

@@ -76,11 +76,14 @@ HotelSchema.statics = {
   },
 
   list ({ skip = 0, limit = 5 } = {}) {
-    return this.find()
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .populate('user')
+    return (
+      this.find()
+        // name asc
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .populate('user')
+    )
   },
 
   incFavoriteCount (hotelId) {

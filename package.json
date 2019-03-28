@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir dist --copy-files",
     "dev": "NODE_ENV=development cross-env nodemon --exec babel-node src/bin",
-    "start": "node dist/bin",
+    "start": "NODE_ENV=production node dist/bin",
     "pretest": "eslint --fix --ignore-path .eslintignore .",
     "test": "NODE_ENV=testing mocha"
   },
