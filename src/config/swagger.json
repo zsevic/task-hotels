@@ -200,11 +200,6 @@
           "Hotels"
         ],
         "summary": "Get all hotels",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
         "produces": [
           "application/json"
         ],
@@ -236,11 +231,6 @@
           "Hotels"
         ],
         "summary": "Get hotel with given ID",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
         "produces": [
           "application/json"
         ],
