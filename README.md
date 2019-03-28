@@ -1,9 +1,8 @@
-# restic
+# task-hotels
 
-> REST API boilerplate powered by Node.js, Express, MongoDB
+> REST API for hotels powered by Node.js, Express, MongoDB
 
-
-See demo: [https://restic.herokuapp.com/api-docs](https://restic.herokuapp.com/api-docs)
+See demo: [https://task-hotels.herokuapp.com/api-docs](https://task-hotels.herokuapp.com/api-docs)
 
 ### :sparkles: Features
 
@@ -37,6 +36,19 @@ cd task-hotels
 cp .env.sample .env # change values
 yarn
 yarn dev
+```
+
+### :construction_worker: Build
+
+```bash
+yarn build
+yarn start
+```
+
+### :rotation_alarm: Testing
+
+```bash
+yarn test
 ```
 
 ### :books: Documentation
