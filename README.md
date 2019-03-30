@@ -8,7 +8,8 @@ See demo: [https://task-hotels.herokuapp.com/api-docs](https://task-hotels.herok
 
 - CRUD operations
 - Node.js with Express
-- MongoDB database with MongoDB
+    - pagination, sorting, filtering
+- MongoDB database with Mongoose
     - entities: users, hotels
 - Authentication
     - powered by JWT
@@ -64,6 +65,8 @@ yarn test
 
 ### :arrow_right: Usage
 
+check API tests for request body
+
 ```bash
 POST /api/v1/users/signup
 POST /api/v1/users/login
@@ -78,5 +81,5 @@ POST /api/v1/hotels/:id
 PATCH /api/v1/hotels/:id
 DELETE /api/v1/hotels/:id
 POST /api/v1/hotels/:id/favorite
-POST /api/v1/hotels/:id/reviews
+GET /api/v1/hotels/:id/reviews
 ```
