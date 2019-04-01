@@ -19,7 +19,7 @@ See demo: [https://task-hotels.herokuapp.com/api-docs](https://task-hotels.herok
         - session-based
         - permission-based
         - role-based
-- API testing
+- unit and API tests
 - API documentation
 - Setups
     - Eslint
